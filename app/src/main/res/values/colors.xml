@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paleta violeta -->
+    <color name="primary">#7C3AED</color>
+    <color name="primary_container">#EDE9FE</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="secondary">#5B21B6</color>
+    <color name="secondary_container">#DDD6FE</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="background">#FAF5FF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="on_background">#1E1B4B</color>
+    <color name="on_surface">#1E1B4B</color>
+    <color name="outline">#A78BFA</color>
+    <color name="card_border_selected">#7C3AED</color>
+    <color name="card_border_unselected">#E9D5FF</color>
+    <color name="overlay_scrim">#CC000000</color>
+    <color name="ic_launcher_background">#7C3AED</color>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AR Drawing Gocho</string>
+    <string name="select_drawing_mode">Seleccionar el modo de dibujo</string>
+    <string name="mode_camera_title">Dibujar con la cámara</string>
+    <string name="mode_camera_desc">Usa un trípode o apoya el teléfono y superpone la imagen sobre el papel con la cámara.</string>
+    <string name="mode_screen_title">Dibujar con pantalla</string>
+    <string name="mode_screen_desc">Coloca un papel sobre la pantalla y sigue las líneas; la imagen actúa como retroiluminado.</string>
+    <string name="continue_cta">Continuar</string>
+    <string name="finish">Finalizar</string>
+    <string name="opacity">Opacidad</string>
+    <string name="scale">Escala</string>
+    <string name="camera">Cámara</string>
+    <string name="flashlight">Linterna</string>
+    <string name="unlock_transform">Mover y escalar</string>
+    <string name="lock_image">Bloquear imagen</string>
+    <string name="unlock_image">Desbloquear imagen</string>
+    <string name="pick_image_required">Elige una imagen de tu galería para continuar.</string>
+    <string name="camera_permission_rationale">Se necesita permiso de cámara para el modo con cámara.</string>
+    <string name="toggle_tools_collapse">Ocultar herramientas de dibujo</string>
+    <string name="toggle_tools_expand">Mostrar herramientas de dibujo</string>
+    <string name="support_kofi_cta">Apóyame en Ko-fi</string>
+</resources>
