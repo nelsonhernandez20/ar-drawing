@@ -44,7 +44,7 @@
         android:layout_marginBottom="16dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/btnKofi"
+        app:layout_constraintBottom_toTopOf="@id/btnSupportAd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleModes">
@@ -141,6 +141,21 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSupportAd"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="8dp"
+        android:paddingVertical="10dp"
+        android:text="@string/support_ad_cta"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@id/btnKofi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/primary" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnKofi"

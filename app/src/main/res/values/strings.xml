@@ -20,4 +20,8 @@
     <string name="toggle_tools_collapse">Ocultar herramientas de dibujo</string>
     <string name="toggle_tools_expand">Mostrar herramientas de dibujo</string>
     <string name="support_kofi_cta">Apóyame en Ko-fi</string>
+    <string name="support_ad_cta">Ver un video y apoyar al desarrollador</string>
+    <string name="support_ad_thanks">¡Gracias por tu apoyo!</string>
+    <string name="support_ad_unavailable">No hay videos disponibles ahora. Inténtalo más tarde.</string>
+    <string name="support_ad_loading">Buscando video…</string>
 </resources>

@@ -4,7 +4,7 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
 
 ## Descargar e instalar
 
-1. Descarga el APK desde [`releases/ar-drawing-gocho-v1.0.apk`](releases/ar-drawing-gocho-v1.0.apk).
+1. Descarga el APK desde [`releases/ar-drawing-gocho-v1.1.apk`](releases/ar-drawing-gocho-v1.1.apk).
 2. En el teléfono, activa **Instalar apps desconocidas** para el navegador o gestor de archivos que uses.
 3. Abre el APK descargado y confirma la instalación.
 
@@ -24,7 +24,7 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
   - Reinicio de transformación
   - Cámara frontal/trasera y linterna (solo modo cámara)
   - Panel de herramientas plegable (acordeón)
-- **Apoyo al desarrollador** — enlace a [Ko-fi](https://ko-fi.com/gocholabs).
+- **Apoyo al desarrollador** — enlace a [Ko-fi](https://ko-fi.com/gocholabs) o botón opcional para ver un anuncio.
 
 ## Flujo de uso
 
@@ -40,7 +40,7 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
 |-------|--------|
 | **Nombre** | AR Drawing Gocho |
 | **Package** | `com.ardrawing.trace` |
-| **Versión** | 1.0 (versionCode 1) |
+| **Versión** | 1.1 (versionCode 2) |
 | **minSdk** | 26 (Android 8.0) |
 | **targetSdk** | 35 |
 | **Lenguaje** | Kotlin |
@@ -66,8 +66,9 @@ APK de release: `app/build/outputs/apk/release/app-release.apk`
 
 ```
 app/src/main/java/com/ardrawing/trace/
-├── MainActivity.kt          # Selección de modo y galería
+├── MainActivity.kt          # Selección de modo, galería y anuncios
 ├── DrawingActivity.kt       # Lienzo, cámara y herramientas
+├── StartIoAdsManager.kt     # Interstitial y video de apoyo
 ├── DrawingMode.kt
 └── BitmapLoadHelper.kt
 ```

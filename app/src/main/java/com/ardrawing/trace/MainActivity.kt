@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var selectedCameraMode: Boolean = true
+    private var launchInterstitialScheduled = false
 
     private val pickImage = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -65,11 +66,38 @@ class MainActivity : AppCompatActivity() {
             pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
+        binding.btnSupportAd.setOnClickListener {
+            binding.btnSupportAd.isEnabled = false
+            Toast.makeText(this, R.string.support_ad_loading, Toast.LENGTH_SHORT).show()
+            StartIoAdsManager.showSupportVideo(
+                activity = this,
+                onUnavailable = {
+                    binding.btnSupportAd.isEnabled = true
+                    Toast.makeText(this, R.string.support_ad_unavailable, Toast.LENGTH_SHORT).show()
+                },
+                onCompleted = {
+                    binding.btnSupportAd.isEnabled = true
+                    Toast.makeText(this, R.string.support_ad_thanks, Toast.LENGTH_SHORT).show()
+                },
+                onShown = {
+                    binding.btnSupportAd.isEnabled = true
+                },
+            )
+        }
+
         binding.btnKofi.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(KOFI_URL)))
         }
 
         refreshSelectionUi()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus && !launchInterstitialScheduled) {
+            launchInterstitialScheduled = true
+            StartIoAdsManager.scheduleLaunchInterstitial(this)
+        }
     }
 
     private fun refreshSelectionUi() {
