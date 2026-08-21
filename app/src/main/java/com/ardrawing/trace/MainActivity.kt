@@ -1,8 +1,6 @@
 package com.ardrawing.trace
 
-import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.SystemBarStyle
@@ -65,10 +63,6 @@ class MainActivity : AppCompatActivity() {
             pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
-        binding.btnKofi.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(KOFI_URL)))
-        }
-
         refreshSelectionUi()
     }
 
@@ -92,9 +86,5 @@ class MainActivity : AppCompatActivity() {
             binding.cardCamera.strokeWidth = resources.getDimensionPixelSize(R.dimen.card_stroke_normal)
             binding.iconCamera.setImageResource(R.drawable.ic_circle_outline)
         }
-    }
-
-    companion object {
-        private const val KOFI_URL = "https://ko-fi.com/gocholabs"
     }
 }

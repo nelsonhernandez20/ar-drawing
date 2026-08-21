@@ -4,7 +4,7 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
 
 ## Descargar e instalar
 
-1. Descarga el APK desde [`releases/ar-drawing-gocho-v1.2.apk`](releases/ar-drawing-gocho-v1.2.apk).
+1. Descarga el APK desde [`releases/ar-drawing-gocho-v1.3.apk`](releases/ar-drawing-gocho-v1.3.apk).
 2. En el teléfono, activa **Instalar apps desconocidas** para el navegador o gestor de archivos que uses.
 3. Abre el APK descargado y confirma la instalación.
 
@@ -24,7 +24,6 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
   - Reinicio de transformación
   - Cámara frontal/trasera y linterna (solo modo cámara)
   - Panel de herramientas plegable (acordeón)
-- **Apoyo al desarrollador** — enlace a [Ko-fi](https://ko-fi.com/gocholabs).
 - **Sin anuncios.**
 
 ## Flujo de uso
@@ -41,7 +40,7 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
 |-------|--------|
 | **Nombre** | AR Drawing Gocho |
 | **Package** | `com.ardrawing.trace` |
-| **Versión** | 1.2 (versionCode 3) |
+| **Versión** | 1.3 (versionCode 4) |
 | **minSdk** | 26 (Android 8.0) |
 | **targetSdk** | 35 |
 | **Lenguaje** | Kotlin |
@@ -75,4 +74,4 @@ app/src/main/java/com/ardrawing/trace/
 
 ## Licencia y autor
 
-Proyecto personal — [Gocho Labs / Ko-fi](https://ko-fi.com/gocholabs).
+Proyecto personal.
