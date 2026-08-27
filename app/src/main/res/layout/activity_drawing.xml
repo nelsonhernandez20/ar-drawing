@@ -43,29 +43,53 @@
         android:id="@+id/toolbarDrawing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/overlay_scrim"
-        android:paddingBottom="10dp"
+        android:background="@color/toolbar_dark"
+        android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/drawing_toolbar"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:navigationIconTint="@color/surface"
-        app:title="@string/app_name"
-        app:titleCentered="true"
-        app:titleTextColor="@color/surface" />
+        app:navigationIconTint="@color/on_primary"
+        app:title=""
+        app:titleTextColor="@color/on_primary">
+
+        <include
+            layout="@layout/view_brand_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabLock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
         android:contentDescription="@string/lock_image"
-        app:backgroundTint="@color/secondary"
+        app:backgroundTint="@color/primary"
+        app:fabCustomSize="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarDrawing"
+        app:maxImageSize="22dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.ARDrawing.FabSquare"
         app:srcCompat="@drawable/ic_lock_open"
-        app:tint="@null" />
+        app:tint="@color/on_primary" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabRotate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/rotate_image"
+        app:backgroundTint="@color/primary"
+        app:fabCustomSize="52dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fabLock"
+        app:maxImageSize="24dp"
+        app:srcCompat="@drawable/ic_rotate"
+        app:tint="@color/on_primary" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabReset"
@@ -73,11 +97,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:contentDescription="@string/unlock_transform"
-        app:backgroundTint="@color/secondary"
+        app:backgroundTint="@color/primary"
+        app:fabCustomSize="48dp"
         app:layout_constraintBottom_toTopOf="@id/bottomCard"
         app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="22dp"
         app:srcCompat="@drawable/ic_reset_transform"
-        app:tint="@null" />
+        app:tint="@color/on_primary" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/bottomCard"
@@ -85,8 +111,8 @@
         android:layout_height="wrap_content"
         android:transitionGroup="true"
         app:cardBackgroundColor="@color/surface"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="8dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -97,7 +123,6 @@
             android:orientation="vertical"
             android:paddingBottom="4dp">
 
-            <!-- Franja para plegar / desplegar (efecto acordeón) -->
             <LinearLayout
                 android:id="@+id/panelToggleBar"
                 android:layout_width="match_parent"
@@ -133,35 +158,39 @@
                 android:orientation="vertical"
                 android:paddingBottom="4dp">
 
-            <TextView
-                android:id="@+id/toolTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
-                android:text="@string/opacity"
-                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                android:textColor="@color/on_surface" />
+                <TextView
+                    android:id="@+id/toolTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:text="@string/opacity"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    android:textColor="@color/on_surface" />
 
-            <com.google.android.material.slider.Slider
-                android:id="@+id/sliderMain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:valueFrom="0.1"
-                android:valueTo="1"
-                android:value="0.65"
-                app:labelBehavior="gone"
-                app:tickVisible="false"
-                app:trackStopIndicatorSize="0dp" />
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:value="0.65"
+                    android:valueFrom="0.1"
+                    android:valueTo="1"
+                    app:labelBehavior="gone"
+                    app:thumbColor="@color/primary"
+                    app:tickVisible="false"
+                    app:trackColorActive="@color/primary"
+                    app:trackColorInactive="@color/secondary_container"
+                    app:trackStopIndicatorSize="0dp" />
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNav"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/surface"
-                app:itemIconTint="@color/bottom_nav_color"
-                app:itemTextColor="@color/bottom_nav_color"
-                app:menu="@menu/drawing_bottom_menu" />
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottomNav"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/surface"
+                    app:itemActiveIndicatorStyle="@style/Widget.ARDrawing.BottomNavIndicator"
+                    app:itemIconTint="@color/bottom_nav_color"
+                    app:itemTextColor="@color/bottom_nav_color"
+                    app:menu="@menu/drawing_bottom_menu" />
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

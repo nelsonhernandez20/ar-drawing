@@ -1,10 +1,10 @@
-# AR Drawing Gocho
+# AR Draw: Easy Sketching
 
 App Android para **trazar dibujos** superponiendo una imagen de tu galería sobre el papel o la pantalla del teléfono.
 
 ## Descargar e instalar
 
-1. Descarga el APK desde [`releases/ar-drawing-gocho-v1.3.apk`](releases/ar-drawing-gocho-v1.3.apk).
+1. Descarga el APK desde [`releases/ar-drawing-gocho-v1.4.apk`](releases/ar-drawing-gocho-v1.4.apk).
 2. En el teléfono, activa **Instalar apps desconocidas** para el navegador o gestor de archivos que uses.
 3. Abre el APK descargado y confirma la instalación.
 
@@ -13,34 +13,36 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
 ## Características
 
 - **Sin login** — entras directo a la app.
-- **Imágenes propias** — solo desde la galería del dispositivo (no hay biblioteca interna).
+- **Imágenes propias** — solo desde la galería del dispositivo.
 - **Dos modos de dibujo:**
   - **Cámara:** superpone la imagen sobre lo que ve la cámara (ideal con trípode o teléfono apoyado).
   - **Pantalla:** coloca papel sobre la pantalla y sigue las líneas como retroiluminado.
 - **Controles en el lienzo:**
-  - Opacidad de la imagen guía
-  - Escala (slider + pellizco)
+  - Opacidad
+  - Zoom (slider + pellizco estable)
+  - Rotación 90°
+  - Orientación vertical u horizontal
   - Bloqueo de posición/tamaño
   - Reinicio de transformación
-  - Cámara frontal/trasera y linterna (solo modo cámara)
-  - Panel de herramientas plegable (acordeón)
+  - Cámara frontal/trasera y flash (modo cámara)
+  - Panel de herramientas plegable
 - **Sin anuncios.**
 
 ## Flujo de uso
 
 1. Elige el modo (cámara o pantalla).
 2. Pulsa **Continuar** y selecciona una imagen de la galería.
-3. Ajusta opacidad, tamaño y posición de la referencia.
+3. Ajusta opacidad, zoom y rotación de la referencia.
 4. Bloquea la imagen cuando esté lista y dibuja.
-5. Pulsa **Finalizar** para salir del lienzo.
+5. Pulsa atrás para salir del lienzo.
 
 ## Especificaciones técnicas
 
 | Campo | Valor |
 |-------|--------|
-| **Nombre** | AR Drawing Gocho |
+| **Nombre** | AR Draw: Easy Sketching |
 | **Package** | `com.ardrawing.trace` |
-| **Versión** | 1.3 (versionCode 4) |
+| **Versión** | 1.4 (versionCode 5) |
 | **minSdk** | 26 (Android 8.0) |
 | **targetSdk** | 35 |
 | **Lenguaje** | Kotlin |

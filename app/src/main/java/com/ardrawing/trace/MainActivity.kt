@@ -8,16 +8,21 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import androidx.lifecycle.lifecycleScope
 import com.ardrawing.trace.databinding.ActivityMainBinding
 import com.google.android.material.color.MaterialColors
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var selectedCameraMode: Boolean = true
+    private var keepSplashVisible = true
 
     private val pickImage = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -31,21 +36,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+        splashScreen.setKeepOnScreenCondition { keepSplashVisible }
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
-            navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
+            statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
         )
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        lifecycleScope.launch {
+            delay(2_200L)
+            keepSplashVisible = false
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            binding.toolbar.updatePadding(
-                top = bars.top,
-                left = bars.left,
-                right = bars.right,
-            )
+            // La toolbar crece con el inset; el título queda debajo de la status bar.
+            binding.toolbar.updatePadding(top = bars.top)
             v.updatePadding(left = bars.left, right = bars.right, bottom = bars.bottom)
             insets
         }

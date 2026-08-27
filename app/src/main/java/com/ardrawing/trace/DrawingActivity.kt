@@ -48,9 +48,11 @@ class DrawingActivity : AppCompatActivity() {
     private var cameraProvider: ProcessCameraProvider? = null
 
     private var overlayScale: Float = 1f
+    private var overlayRotation: Float = 0f
     /** Última posición del dedo en pantalla (raw); evita jitter al arrastrar la vista. */
     private var lastRawX: Float = 0f
     private var lastRawY: Float = 0f
+    private var wasScaling: Boolean = false
 
     private enum class PanelTool { OPACITY, SCALE }
 
@@ -69,8 +71,19 @@ class DrawingActivity : AppCompatActivity() {
     private val scaleListener = object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
         override fun onScale(detector: ScaleGestureDetector): Boolean {
             if (locked) return false
-            val newScale = (overlayScale * detector.scaleFactor).coerceIn(MIN_SCALE, MAX_SCALE)
+            val oldScale = overlayScale
+            val newScale = (oldScale * detector.scaleFactor).coerceIn(MIN_SCALE, MAX_SCALE)
+            if (oldScale == 0f) return false
+            val actualFactor = newScale / oldScale
             overlayScale = newScale
+
+            // Escala alrededor del punto entre los dedos para que no “salte” la imagen.
+            val view = binding.overlayImage
+            val focusX = detector.focusX
+            val focusY = detector.focusY
+            view.translationX += (focusX - view.pivotX) * (1f - actualFactor)
+            view.translationY += (focusY - view.pivotY) * (1f - actualFactor)
+
             applyOverlayTransform()
             syncScaleSlider()
             return true
@@ -87,7 +100,8 @@ class DrawingActivity : AppCompatActivity() {
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.updatePadding(top = bars.top, left = bars.left, right = bars.right, bottom = bars.bottom)
+            binding.toolbarDrawing.updatePadding(top = bars.top)
+            v.updatePadding(left = bars.left, right = bars.right, bottom = bars.bottom)
             insets
         }
 
@@ -149,14 +163,6 @@ class DrawingActivity : AppCompatActivity() {
 
     private fun bindToolbar() {
         binding.toolbarDrawing.setNavigationOnClickListener { finish() }
-        binding.toolbarDrawing.setOnMenuItemClickListener { item ->
-            if (item.itemId == R.id.action_finish) {
-                finish()
-                true
-            } else {
-                false
-            }
-        }
     }
 
     private fun bindToolsPanelToggle() {
@@ -182,8 +188,14 @@ class DrawingActivity : AppCompatActivity() {
                 if (locked) R.string.unlock_image else R.string.lock_image
             )
         }
+        binding.fabRotate.setOnClickListener {
+            if (locked) return@setOnClickListener
+            overlayRotation = (overlayRotation + 90f) % 360f
+            applyOverlayTransform()
+        }
         binding.fabReset.setOnClickListener {
             overlayScale = 1f
+            overlayRotation = 0f
             binding.overlayImage.translationX = 0f
             binding.overlayImage.translationY = 0f
             applyOverlayTransform()
@@ -194,30 +206,55 @@ class DrawingActivity : AppCompatActivity() {
     private fun bindOverlayGestures() {
         binding.overlayImage.setOnTouchListener { v, event ->
             if (locked) return@setOnTouchListener false
-            val handledScale = scaleDetector.onTouchEvent(event)
-            if (!scaleDetector.isInProgress && event.pointerCount == 1) {
-                when (event.actionMasked) {
-                    MotionEvent.ACTION_DOWN -> {
-                        v.parent.requestDisallowInterceptTouchEvent(true)
-                        lastRawX = event.rawX
-                        lastRawY = event.rawY
-                    }
+            scaleDetector.onTouchEvent(event)
+            val scaling = scaleDetector.isInProgress
 
-                    MotionEvent.ACTION_MOVE -> {
-                        val dx = event.rawX - lastRawX
-                        val dy = event.rawY - lastRawY
-                        lastRawX = event.rawX
-                        lastRawY = event.rawY
-                        binding.overlayImage.translationX += dx
-                        binding.overlayImage.translationY += dy
-                    }
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    v.parent.requestDisallowInterceptTouchEvent(true)
+                    lastRawX = event.rawX
+                    lastRawY = event.rawY
+                    wasScaling = false
+                }
 
-                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                        v.parent.requestDisallowInterceptTouchEvent(false)
+                MotionEvent.ACTION_POINTER_DOWN -> {
+                    wasScaling = true
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+                    if (!scaling && event.pointerCount == 1) {
+                        // Tras un pellizco, el primer MOVE con 1 dedo no debe arrastrar con delta viejo.
+                        if (wasScaling) {
+                            lastRawX = event.rawX
+                            lastRawY = event.rawY
+                            wasScaling = false
+                        } else {
+                            val dx = event.rawX - lastRawX
+                            val dy = event.rawY - lastRawY
+                            lastRawX = event.rawX
+                            lastRawY = event.rawY
+                            binding.overlayImage.translationX += dx
+                            binding.overlayImage.translationY += dy
+                        }
                     }
                 }
+
+                MotionEvent.ACTION_POINTER_UP -> {
+                    // Queda un dedo: reinicia referencia de arrastre para evitar salto.
+                    if (event.pointerCount == 2) {
+                        val remaining = if (event.actionIndex == 0) 1 else 0
+                        lastRawX = event.getRawX(remaining)
+                        lastRawY = event.getRawY(remaining)
+                        wasScaling = true
+                    }
+                }
+
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    v.parent.requestDisallowInterceptTouchEvent(false)
+                    wasScaling = false
+                }
             }
-            handledScale || event.pointerCount == 1
+            true
         }
     }
 
@@ -303,6 +340,7 @@ class DrawingActivity : AppCompatActivity() {
     private fun applyOverlayTransform() {
         binding.overlayImage.scaleX = overlayScale
         binding.overlayImage.scaleY = overlayScale
+        binding.overlayImage.rotation = overlayRotation
     }
 
     private fun loadImageFromGallery(uri: Uri) {
@@ -318,6 +356,9 @@ class DrawingActivity : AppCompatActivity() {
             binding.overlayImage.setImageBitmap(bmp)
             binding.overlayImage.alpha = 0.65f
             overlayScale = 1f
+            overlayRotation = 0f
+            binding.overlayImage.translationX = 0f
+            binding.overlayImage.translationY = 0f
             applyOverlayTransform()
             if (activeTool == PanelTool.OPACITY) {
                 sliderProgrammatic = true

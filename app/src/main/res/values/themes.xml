@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Theme.ARDrawing.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.ARDrawing</item>
+    </style>
+
     <style name="Theme.ARDrawing" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/on_primary</item>
@@ -17,8 +23,17 @@
     </style>
 
     <style name="Theme.ARDrawing.Drawing" parent="Theme.ARDrawing">
-        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:statusBarColor">@color/toolbar_dark</item>
         <item name="android:navigationBarColor">@android:color/black</item>
         <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="ShapeAppearance.ARDrawing.FabSquare" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="Widget.ARDrawing.BottomNavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/primary_container</item>
     </style>
 </resources>
