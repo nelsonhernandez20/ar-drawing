@@ -48,8 +48,12 @@ Sitio web (si tienes GitHub Pages)
 https://nelsonhernandez20.github.io/ar-drawing/
 
 Política de privacidad
-Sube play/privacy-policy.html a GitHub Pages (o cualquier hosting) y pega esa URL en Play Console.
-Ejemplo: https://nelsonhernandez20.github.io/ar-drawing/privacy.html
+URL para Play Console (pega tal cual):
+https://nelsonhernandez20.github.io/ar-drawing/privacy.html
+
+Inglés: https://nelsonhernandez20.github.io/ar-drawing/privacy-en.html
+Archivos en el repo: docs/privacy.html y docs/privacy-en.html
+Activar GitHub Pages: repo → Settings → Pages → Source: Deploy from branch → main → /docs
 
 Correo de contacto
 Usa el mismo Gmail de tu cuenta de desarrollador de Play.

@@ -1,5 +1,7 @@
 # AR Draw: Easy Sketching
 
+**[Política de privacidad](privacy.html)** · **[Privacy Policy](privacy-en.html)**
+
 App Android para **trazar dibujos** superponiendo una imagen de tu galería sobre el papel o la pantalla del teléfono.
 
 ## Descargar e instalar
@@ -78,7 +80,9 @@ APK de release: `app/build/outputs/apk/release/app-release.apk`
 AAB: `app/build/outputs/bundle/release/app-release.aab` (también en `releases/` si se copia ahí).
 
 3. Textos de ficha (español): [`play/listing-es.txt`](play/listing-es.txt)
-4. Política de privacidad: sube [`play/privacy-policy.html`](play/privacy-policy.html) a GitHub Pages (u otro hosting) y pega la URL en Play Console. AdMob lo exige.
+4. Política de privacidad en [`docs/`](docs/) (GitHub Pages). URL para Play Console:
+   `https://nelsonhernandez20.github.io/ar-drawing/privacy.html`
+   Activar en el repo: **Settings → Pages → Branch `main` → folder `/docs`**.
 5. **Guarda una copia** del `.jks` y de `keystore.properties`. Sin esa clave no podrás actualizar la app en Play.
 
 ## Supabase (catálogo de imágenes)
