@@ -1,4 +1,4 @@
-package com.ardrawing.trace
+package com.ardrawing.gocho
 
 import android.Manifest
 import android.content.Context
@@ -28,7 +28,7 @@ import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
-import com.ardrawing.trace.databinding.ActivityDrawingBinding
+import com.ardrawing.gocho.databinding.ActivityDrawingBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

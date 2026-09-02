@@ -1,0 +1,65 @@
+# Ficha de Google Play — AR Draw: Easy Sketching
+# Copia y pega en Play Console. Idioma: español (es-US / es-419).
+
+Nombre de la aplicación (máx. 30)
+AR Draw: Easy Sketching
+
+Nombre corto / título (si pide 50)
+AR Draw: Easy Sketching
+
+Descripción breve (máx. 80)
+Traza dibujos con la cámara o la pantalla. Plantillas gratis y premium.
+
+Descripción completa
+AR Draw: Easy Sketching te ayuda a copiar cualquier dibujo superponiendo una imagen de referencia sobre el papel.
+
+Cómo funciona
+1. Elige el modo: cámara (con trípode o el teléfono apoyado) o pantalla (papel sobre el móvil).
+2. Usa una plantilla de la biblioteca o una foto de tu galería.
+3. Ajusta opacidad, zoom y rotación, bloquea la imagen y dibuja.
+
+Características
+• Sin cuenta ni registro
+• Biblioteca de plantillas en línea (gratis y premium)
+• Usa tus propias imágenes
+• Zoom, opacidad, rotación 90° y bloqueo de posición
+• Cámara frontal o trasera y flash
+• Panel de herramientas plegable
+
+Anuncios
+La app incluye banners e intersticiales de Google AdMob. Las plantillas premium y el uso de la galería pueden mostrar un anuncio a pantalla completa antes de abrir el lienzo.
+
+Requisito
+Android 8.0 o superior.
+
+Categoría sugerida
+Arte y diseño
+
+Etiquetas / palabras clave (referencia, no campo oficial)
+dibujo, trazar, sketch, AR, plantillas, cómo dibujar, calcar
+
+Texto de Novedades (esta versión 1.6.0)
+• Biblioteca de plantillas gratis y premium
+• Anuncios: banners e intersticiales
+• La app apunta a Android 16
+• Interfaz en inglés y español
+
+Sitio web (si tienes GitHub Pages)
+https://nelsonhernandez20.github.io/ar-drawing/
+
+Política de privacidad
+Sube play/privacy-policy.html a GitHub Pages (o cualquier hosting) y pega esa URL en Play Console.
+Ejemplo: https://nelsonhernandez20.github.io/ar-drawing/privacy.html
+
+Correo de contacto
+Usa el mismo Gmail de tu cuenta de desarrollador de Play.
+
+Clasificación de contenido (orientación)
+• Anuncios: sí
+• Compras in-app: no
+• Datos de usuarios: no hay cuentas; se usa ID de publicidad de Google para anuncios
+• Público: 3+ o “para todos”, sin contenido dirigido a niños (si marcas “dirigida a niños”, AdMob tiene restricciones)
+
+Capturas (mínimo Play)
+Teléfono: al menos 2, recomendadas 4–8, PNG o JPEG, sin marco de dispositivo.
+Pantallas útiles: modo de dibujo, biblioteca, lienzo con cámara, lienzo con plantilla.

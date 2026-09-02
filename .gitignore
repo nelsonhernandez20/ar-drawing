@@ -11,3 +11,8 @@ captures
 *.apk
 *.aab
 !releases/*.apk
+!releases/*.aab
+*.jks
+*.keystore
+/keystore.properties
+/keystore/

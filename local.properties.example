@@ -1,3 +1,8 @@
 # Copia estas líneas a local.properties (no subir a git)
 # supabase.url=https://YOUR_PROJECT.supabase.co
 # supabase.anon_key=YOUR_ANON_KEY
+#
+# AdMob (opcional; si no las pones se usan IDs de prueba de Google)
+# admob.app_id=ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx
+# admob.banner_id=ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx
+# admob.interstitial_id=ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx

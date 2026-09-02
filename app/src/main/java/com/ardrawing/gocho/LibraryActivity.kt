@@ -1,4 +1,4 @@
-package com.ardrawing.trace
+package com.ardrawing.gocho
 
 import android.content.Context
 import android.content.Intent
@@ -14,19 +14,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
-import com.ardrawing.trace.databinding.ActivityLibraryBinding
+import com.ardrawing.gocho.databinding.ActivityLibraryBinding
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.launch
 
 class LibraryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLibraryBinding
-    private lateinit var billingRepository: BillingRepository
     private lateinit var catalogRepository: CatalogRepository
+    private lateinit var adsHelper: AdsHelper
 
     private var mode: DrawingMode = DrawingMode.CAMERA
     private var allImages: List<CatalogImage> = emptyList()
@@ -36,7 +34,11 @@ class LibraryActivity : AppCompatActivity() {
         ActivityResultContracts.PickVisualMedia(),
     ) { uri ->
         if (uri != null) {
-            startActivity(DrawingActivity.intent(this, mode, uri))
+            binding.progressLoading.isVisible = true
+            adsHelper.showInterstitial(this) {
+                binding.progressLoading.isVisible = false
+                startActivity(DrawingActivity.intent(this, mode, uri))
+            }
         }
     }
 
@@ -52,8 +54,8 @@ class LibraryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val app = application as ARDrawingApp
-        billingRepository = app.billingRepository
         catalogRepository = app.catalogRepository
+        adsHelper = app.adsHelper
 
         mode = intent.getStringExtra(EXTRA_MODE)
             ?.let { runCatching { DrawingMode.valueOf(it) }.getOrNull() }
@@ -70,7 +72,6 @@ class LibraryActivity : AppCompatActivity() {
 
         adapter = LibraryAdapter(
             scope = lifecycleScope,
-            isPremiumUser = { billingRepository.isPremiumActive.value },
             onImageClick = { image -> onCatalogImageSelected(image) },
         )
         binding.recyclerImages.layoutManager = GridLayoutManager(this, 2)
@@ -92,22 +93,9 @@ class LibraryActivity : AppCompatActivity() {
             pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                billingRepository.isPremiumActive.collect {
-                    adapter.notifyDataSetChanged()
-                    refreshFilteredList()
-                }
-            }
-        }
-
+        adsHelper.bindBanner(binding.adBanner)
+        adsHelper.preloadInterstitial(this)
         loadCatalog()
-        billingRepository.refreshPurchases()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        billingRepository.refreshPurchases()
     }
 
     private fun loadCatalog() {
@@ -115,7 +103,7 @@ class LibraryActivity : AppCompatActivity() {
         binding.textEmpty.isVisible = false
 
         lifecycleScope.launch {
-            val result = catalogRepository.fetchImages()
+            val result = catalogRepository.fetchImages(this@LibraryActivity)
             binding.progressLoading.isVisible = false
 
             result.onSuccess { images ->
@@ -145,11 +133,18 @@ class LibraryActivity : AppCompatActivity() {
     }
 
     private fun onCatalogImageSelected(image: CatalogImage) {
-        if (image.isPremium && !billingRepository.isPremiumActive.value) {
-            PaywallBottomSheet().show(supportFragmentManager, "paywall")
-            return
+        if (image.isPremium) {
+            binding.progressLoading.isVisible = true
+            adsHelper.showInterstitial(this) {
+                binding.progressLoading.isVisible = false
+                openCatalogImage(image)
+            }
+        } else {
+            openCatalogImage(image)
         }
+    }
 
+    private fun openCatalogImage(image: CatalogImage) {
         binding.progressLoading.isVisible = true
         lifecycleScope.launch {
             val result = ImageDownloadHelper.downloadTemplate(this@LibraryActivity, image)

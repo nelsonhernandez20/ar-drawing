@@ -1,4 +1,4 @@
-package com.ardrawing.trace
+package com.ardrawing.gocho
 
 import android.graphics.Color
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
-import com.ardrawing.trace.databinding.ActivityMainBinding
+import com.ardrawing.gocho.databinding.ActivityMainBinding
 import com.google.android.material.color.MaterialColors
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -57,6 +57,9 @@ class MainActivity : AppCompatActivity() {
             val mode = if (selectedCameraMode) DrawingMode.CAMERA else DrawingMode.SCREEN
             startActivity(LibraryActivity.intent(this, mode))
         }
+
+        val adsHelper = (application as ARDrawingApp).adsHelper
+        adsHelper.bindBanner(binding.adBanner)
 
         refreshSelectionUi()
     }

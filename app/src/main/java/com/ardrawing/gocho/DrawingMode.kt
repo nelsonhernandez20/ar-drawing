@@ -1,4 +1,4 @@
-package com.ardrawing.trace
+package com.ardrawing.gocho
 
 enum class DrawingMode {
     CAMERA,

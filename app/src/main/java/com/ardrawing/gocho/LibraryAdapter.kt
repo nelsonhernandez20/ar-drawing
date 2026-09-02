@@ -1,4 +1,4 @@
-package com.ardrawing.trace
+package com.ardrawing.gocho
 
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ardrawing.trace.databinding.ItemLibraryImageBinding
+import com.ardrawing.gocho.databinding.ItemLibraryImageBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -18,7 +18,6 @@ import okhttp3.Request
 
 class LibraryAdapter(
     private val scope: CoroutineScope,
-    private val isPremiumUser: () -> Boolean,
     private val onImageClick: (CatalogImage) -> Unit,
 ) : ListAdapter<CatalogImage, LibraryAdapter.ViewHolder>(Diff) {
 
@@ -45,8 +44,7 @@ class LibraryAdapter(
 
         fun bind(item: CatalogImage) {
             binding.textTitle.text = item.title
-            val locked = item.isPremium && !isPremiumUser()
-            binding.iconLock.isVisible = locked
+            binding.iconLock.isVisible = item.isPremium
 
             loadJob?.cancel()
             binding.imageThumb.setImageDrawable(null)

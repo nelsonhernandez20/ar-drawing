@@ -1,6 +1,7 @@
-package com.ardrawing.trace
+package com.ardrawing.gocho
 
-import com.ardrawing.trace.BuildConfig
+import android.content.Context
+import com.ardrawing.gocho.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -15,13 +16,13 @@ class CatalogRepository {
         .readTimeout(30, TimeUnit.SECONDS)
         .build()
 
-    suspend fun fetchImages(): Result<List<CatalogImage>> = withContext(Dispatchers.IO) {
+    suspend fun fetchImages(context: Context): Result<List<CatalogImage>> = withContext(Dispatchers.IO) {
         val baseUrl = BuildConfig.SUPABASE_URL.trim()
         val anonKey = BuildConfig.SUPABASE_ANON_KEY.trim()
 
         if (baseUrl.isEmpty() || anonKey.isEmpty()) {
             return@withContext Result.failure(
-                IllegalStateException("Supabase no configurado. Añade supabase.url y supabase.anon_key en local.properties"),
+                IllegalStateException(context.getString(R.string.supabase_not_configured)),
             )
         }
 
@@ -36,7 +37,7 @@ class CatalogRepository {
         runCatching {
             client.newCall(request).execute().use { response ->
                 if (!response.isSuccessful) {
-                    error("Supabase error: ${response.code}")
+                    error(context.getString(R.string.supabase_error, response.code))
                 }
                 val body = response.body?.string() ?: "[]"
                 parseImages(body)

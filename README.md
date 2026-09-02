@@ -14,7 +14,7 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
 
 - **Sin login** — entras directo a la app.
 - **Biblioteca de plantillas** — imágenes gratis y premium (Supabase).
-- **Suscripción Premium** — Google Play Billing (`premium_monthly`), sin cuenta propia.
+- **Premium con anuncio** — un intersticial de AdMob al abrir plantillas premium.
 - **Imágenes propias** — galería del dispositivo siempre disponible.
 - **Dos modos de dibujo:**
   - **Cámara:** superpone la imagen sobre lo que ve la cámara (ideal con trípode o teléfono apoyado).
@@ -28,7 +28,7 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
   - Reinicio de transformación
   - Cámara frontal/trasera y flash (modo cámara)
   - Panel de herramientas plegable
-- **Sin anuncios.**
+- **Anuncios AdMob** — banners en home y biblioteca; intersticial en plantillas premium.
 
 ## Flujo de uso
 
@@ -43,10 +43,10 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
 | Campo | Valor |
 |-------|--------|
 | **Nombre** | AR Draw: Easy Sketching |
-| **Package** | `com.ardrawing.trace` |
-| **Versión** | 1.4 (versionCode 5) |
+| **Package** | `com.ardrawing.gocho` |
+| **Versión** | 1.6.0 (versionCode 8) |
 | **minSdk** | 26 (Android 8.0) |
-| **targetSdk** | 35 |
+| **targetSdk** | 36 (Android 16) |
 | **Lenguaje** | Kotlin |
 | **UI** | Material 3, View Binding |
 | **Cámara** | CameraX |
@@ -66,6 +66,21 @@ APK de debug: `app/build/outputs/apk/debug/app-debug.apk`
 
 APK de release: `app/build/outputs/apk/release/app-release.apk`
 
+## Publicar en Google Play
+
+1. Copia [`keystore.properties.example`](keystore.properties.example) a `keystore.properties` y genera un keystore de subida (no subir `.jks` ni contraseñas a git).
+2. Compila el Android App Bundle:
+
+```bash
+./gradlew :app:bundleRelease
+```
+
+AAB: `app/build/outputs/bundle/release/app-release.aab` (también en `releases/` si se copia ahí).
+
+3. Textos de ficha (español): [`play/listing-es.txt`](play/listing-es.txt)
+4. Política de privacidad: sube [`play/privacy-policy.html`](play/privacy-policy.html) a GitHub Pages (u otro hosting) y pega la URL en Play Console. AdMob lo exige.
+5. **Guarda una copia** del `.jks` y de `keystore.properties`. Sin esa clave no podrás actualizar la app en Play.
+
 ## Supabase (catálogo de imágenes)
 
 1. Ejecuta [`supabase/schema.sql`](supabase/schema.sql) en el SQL Editor.
@@ -77,20 +92,24 @@ supabase.url=https://TU_PROYECTO.supabase.co
 supabase.anon_key=TU_ANON_KEY
 ```
 
-## Google Play (suscripción)
+## AdMob
 
-1. En Play Console crea suscripción `premium_monthly`.
-2. Publica en pista interna para probar Billing (no funciona con APK suelto).
-3. Añade licencias de prueba con tu Gmail.
+Por defecto la app usa **unidades de prueba** de Google. Para producción, en `local.properties`:
+
+```properties
+admob.app_id=ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx
+admob.banner_id=ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx
+admob.interstitial_id=ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx
+```
 
 ## Estructura del proyecto
 
 ```
-app/src/main/java/com/ardrawing/trace/
+app/src/main/java/com/ardrawing/gocho/
 ├── MainActivity.kt          # Selección de modo
-├── LibraryActivity.kt       # Biblioteca + paywall
+├── LibraryActivity.kt       # Biblioteca + intersticial premium
 ├── DrawingActivity.kt       # Lienzo, cámara y herramientas
-├── BillingRepository.kt     # Google Play Billing
+├── AdsHelper.kt             # Banners e intersticiales AdMob
 ├── CatalogRepository.kt     # Catálogo Supabase
 ├── DrawingMode.kt
 └── BitmapLoadHelper.kt

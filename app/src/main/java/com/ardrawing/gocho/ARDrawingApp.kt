@@ -1,19 +1,19 @@
-package com.ardrawing.trace
+package com.ardrawing.gocho
 
 import android.app.Application
 
 class ARDrawingApp : Application() {
 
-    lateinit var billingRepository: BillingRepository
+    lateinit var catalogRepository: CatalogRepository
         private set
 
-    lateinit var catalogRepository: CatalogRepository
+    lateinit var adsHelper: AdsHelper
         private set
 
     override fun onCreate() {
         super.onCreate()
-        billingRepository = BillingRepository(this)
         catalogRepository = CatalogRepository()
-        billingRepository.connect()
+        adsHelper = AdsHelper(this)
+        adsHelper.initialize()
     }
 }

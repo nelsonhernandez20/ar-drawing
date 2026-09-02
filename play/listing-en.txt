@@ -1,0 +1,42 @@
+# Google Play listing — AR Draw: Easy Sketching
+# Copy into Play Console. Language: English (en-US).
+
+App name (max 30)
+AR Draw: Easy Sketching
+
+Short title (if 50 chars)
+AR Draw: Easy Sketching
+
+Short description (max 80)
+Trace drawings with camera or screen. Free and premium templates.
+
+Full description
+AR Draw: Easy Sketching helps you copy any drawing by overlaying a reference image on paper.
+
+How it works
+1. Choose mode: camera (with a tripod or propped phone) or screen (paper on the phone).
+2. Use a library template or a photo from your gallery.
+3. Adjust opacity, zoom, and rotation, lock the image, and draw.
+
+Features
+• No account or sign-in required
+• Online template library (free and premium)
+• Use your own images
+• Zoom, opacity, 90° rotation, and position lock
+• Front or back camera and flash
+• Collapsible tools panel
+
+Ads
+The app includes Google AdMob banners and interstitials. Premium templates and gallery use may show a full-screen ad before opening the canvas.
+
+Requirement
+Android 8.0 or later.
+
+Suggested category
+Art & Design
+
+What's new (version 1.6.0)
+• Free and premium template library
+• Ads: banners and interstitials
+• Targets Android 16
+• English and Spanish UI
