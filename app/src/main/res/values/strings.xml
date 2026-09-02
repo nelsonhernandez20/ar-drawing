@@ -9,6 +9,7 @@
     <string name="mode_screen_title">Dibujar con pantalla</string>
     <string name="mode_screen_desc">Coloca un papel sobre la pantalla y sigue las líneas; la imagen actúa como retroiluminado.</string>
     <string name="continue_cta">Continuar</string>
+    <string name="navigate_back">Volver</string>
     <string name="opacity">Opacidad</string>
     <string name="scale">Zoom</string>
     <string name="camera">Cámara</string>
@@ -22,4 +23,20 @@
     <string name="toggle_tools_collapse">Ocultar herramientas de dibujo</string>
     <string name="toggle_tools_expand">Mostrar herramientas de dibujo</string>
     <string name="reference_thumb">Vista previa de la imagen de referencia</string>
+    <string name="library_title">Biblioteca</string>
+    <string name="tab_free">Gratis</string>
+    <string name="tab_premium">Premium</string>
+    <string name="use_my_image">Usar mi imagen</string>
+    <string name="library_empty">No hay plantillas todavía. Usa tu imagen o configura Supabase.</string>
+    <string name="library_tab_empty">No hay plantillas en esta categoría.</string>
+    <string name="library_load_error">No se pudo cargar el catálogo: %1$s</string>
+    <string name="download_error">No se pudo descargar la imagen.</string>
+    <string name="premium_locked">Contenido premium</string>
+    <string name="paywall_title">AR Draw Premium</string>
+    <string name="paywall_bullet_1">• Acceso a todas las plantillas premium</string>
+    <string name="paywall_bullet_2">• Nuevas imágenes cada mes</string>
+    <string name="paywall_bullet_3">• Sin registro: usa tu cuenta de Google</string>
+    <string name="subscribe_cta">Suscribirse</string>
+    <string name="price_loading">Consultando precio…</string>
+    <string name="paywall_disclaimer">La suscripción se renueva automáticamente. Cancela en Google Play cuando quieras.</string>
 </resources>

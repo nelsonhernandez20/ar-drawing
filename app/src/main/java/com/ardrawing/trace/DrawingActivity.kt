@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.widget.Toast
+import android.graphics.Color
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -94,7 +96,10 @@ class DrawingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
+        )
         binding = ActivityDrawingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -162,7 +167,7 @@ class DrawingActivity : AppCompatActivity() {
         packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
 
     private fun bindToolbar() {
-        binding.toolbarDrawing.setNavigationOnClickListener { finish() }
+        binding.btnBack.setOnClickListener { finish() }
     }
 
     private fun bindToolsPanelToggle() {

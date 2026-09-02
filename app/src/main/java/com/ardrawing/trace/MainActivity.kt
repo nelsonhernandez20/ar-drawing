@@ -2,11 +2,8 @@ package com.ardrawing.trace
 
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
@@ -23,17 +20,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var selectedCameraMode: Boolean = true
     private var keepSplashVisible = true
-
-    private val pickImage = registerForActivityResult(
-        ActivityResultContracts.PickVisualMedia()
-    ) { uri ->
-        if (uri != null) {
-            val mode = if (selectedCameraMode) DrawingMode.CAMERA else DrawingMode.SCREEN
-            startActivity(DrawingActivity.intent(this, mode, uri))
-        } else {
-            Toast.makeText(this, R.string.pick_image_required, Toast.LENGTH_SHORT).show()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
@@ -53,7 +39,6 @@ class MainActivity : AppCompatActivity() {
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            // La toolbar crece con el inset; el título queda debajo de la status bar.
             binding.toolbar.updatePadding(top = bars.top)
             v.updatePadding(left = bars.left, right = bars.right, bottom = bars.bottom)
             insets
@@ -69,7 +54,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnContinue.setOnClickListener {
-            pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            val mode = if (selectedCameraMode) DrawingMode.CAMERA else DrawingMode.SCREEN
+            startActivity(LibraryActivity.intent(this, mode))
         }
 
         refreshSelectionUi()

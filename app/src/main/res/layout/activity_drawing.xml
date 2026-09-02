@@ -39,26 +39,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.appbar.MaterialToolbar
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbarDrawing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/toolbar_dark"
+        android:background="@color/toolbar_scrim"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:navigationIconTint="@color/on_primary"
-        app:title=""
-        app:titleTextColor="@color/on_primary">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/navigate_back"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="@color/on_primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <include
+            android:id="@+id/brandTitle"
             layout="@layout/view_brand_title"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" />
-    </com.google.android.material.appbar.MaterialToolbar>
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabLock"

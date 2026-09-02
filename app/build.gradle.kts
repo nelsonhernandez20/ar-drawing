@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -11,8 +13,24 @@ android {
         applicationId = "com.ardrawing.trace"
         minSdk = 26
         targetSdk = 35
-        versionCode = 6
-        versionName = "1.4.1"
+        versionCode = 7
+        versionName = "1.5.0"
+
+        val props = Properties()
+        val localFile = rootProject.file("local.properties")
+        if (localFile.exists()) {
+            localFile.inputStream().use { props.load(it) }
+        }
+        buildConfigField(
+            "String",
+            "SUPABASE_URL",
+            "\"${props.getProperty("supabase.url", "")}\"",
+        )
+        buildConfigField(
+            "String",
+            "SUPABASE_ANON_KEY",
+            "\"${props.getProperty("supabase.anon_key", "")}\"",
+        )
     }
 
     buildTypes {
@@ -34,6 +52,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -46,7 +65,11 @@ dependencies {
     implementation("androidx.transition:transition:1.5.1")
     implementation("androidx.activity:activity-ktx:1.9.3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation("com.android.billingclient:billing-ktx:7.1.1")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     val camerax = "1.4.1"
     implementation("androidx.camera:camera-core:$camerax")
