@@ -1,0 +1,20 @@
+AR Draw: Easy Sketching helps you copy any drawing by overlaying a reference image on paper.
+
+HOW IT WORKS
+• Choose camera mode (tripod or propped phone) or screen mode (paper on the phone).
+• Pick a library template or a photo from your gallery.
+• Adjust opacity, zoom, and rotation, lock the image, and draw.
+
+FEATURES
+• No account or sign-in required
+• Online template library (free and premium)
+• Use your own images
+• Zoom, opacity, 90° rotation, and position lock
+• Front or back camera and flash
+• Collapsible tools panel
+
+ADS
+The app includes Google AdMob banners and interstitials. Premium templates and gallery use may show a full-screen ad before opening the canvas.
+
+REQUIREMENTS
+Android 8.0 or later.

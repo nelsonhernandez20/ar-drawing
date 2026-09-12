@@ -1,0 +1,58 @@
+FICHA DE GOOGLE PLAY — AR Draw: Easy Sketching
+===========================================
+
+Carpeta: play/import/
+
+OPCIÓN A — Copiar y pegar (más fiable)
+--------------------------------------
+1. Play Console → Ficha de Play Store → idioma en-US (predeterminado).
+2. Abre play/import/en-US/ y pega cada archivo en su campo:
+   - title.txt → Nombre de la aplicación
+   - short_description.txt → Descripción breve
+   - full_description.txt → Descripción completa
+3. Gestionar traducciones → Añadir idioma → Español (Latinoamérica) es-419
+   (o Español Estados Unidos es-US si prefieres).
+4. Pega los archivos de play/import/es-419/ en los mismos campos.
+5. Al subir el AAB, en Novedades pega release_notes.txt del idioma correspondiente.
+
+OPCIÓN B — CSV
+--------------
+- store-listing.csv          → todas las filas por idioma (locale, title, …)
+- store-listing-by-field.csv → una fila por campo, columnas en-US y es-419
+- store-listing-source-en-US.csv → solo inglés (base para “Importar con IA”)
+- store-listing-source-es-419.csv → solo español (Latinoamérica) para importar traducción ES
+
+Si Play pide importar archivo en la ficha:
+  • Prueba store-listing-source-en-US.csv y deja que la IA genere otros idiomas, O
+  • Usa store-listing-by-field.csv si acepta varias columnas de idioma.
+
+FICHA EN ESPAÑOL (importar)
+---------------------------
+1. Editar ficha predeterminada → Gestionar traducciones → Añadir idioma → Español (Latinoamérica) es-419
+2. Cambia el idioma del editor a es-419
+3. Importar un archivo → sube play/import/store-listing-source-es-419.csv
+4. Si pregunta sobrescribir → Sobrescribir traducciones
+5. Guardar como borrador
+
+Si el importador no acepta el CSV, pega los .txt de play/import/es-419/
+
+LÍMITES DE CARACTERES (comprobados)
+-----------------------------------
+- Nombre: máx. 30
+- Descripción breve: máx. 80
+- Descripción completa: máx. 4000
+
+CONTACTO / ENLACES (Configuración de la tienda, no van en estos archivos)
+-------------------------------------------------------------------------
+- Sitio web: https://nelsonhernandez20.github.io/ar-drawing/
+- Privacidad: https://nelsonhernandez20.github.io/ar-drawing/privacy.html
+- Correo: tu Gmail de desarrollador (ej. xeixe86@gmail.com)
+
+CAPTURAS
+--------
+Mínimo 2 capturas de teléfono (PNG/JPEG). Recomendadas: inicio, biblioteca, lienzo cámara, lienzo plantilla.
+
+GRÁFICOS DE PLAY (play/assets/)
+--------------------------------
+- play-store-icon-512.png           → 512×512 px, PNG, <1 MB (Icono de la aplicación)
+- play-store-feature-graphic-1024x500.png → 1024×500 px (Gráfico de funciones)
