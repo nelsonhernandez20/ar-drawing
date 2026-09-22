@@ -15,8 +15,8 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
 ## Características
 
 - **Sin login** — entras directo a la app.
-- **Biblioteca de plantillas** — imágenes gratis y premium (Supabase).
-- **Premium con anuncio** — un intersticial de AdMob al abrir plantillas premium.
+- **Biblioteca de plantillas** — categorías (3D, AniMemes, animales, carros) con carrusel; gratis y premium mezclados.
+- **Premium con anuncio** — un intersticial de AdMob al abrir plantillas premium (corona).
 - **Imágenes propias** — galería del dispositivo siempre disponible.
 - **Dos modos de dibujo:**
   - **Cámara:** superpone la imagen sobre lo que ve la cámara (ideal con trípode o teléfono apoyado).
@@ -35,7 +35,7 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
 ## Flujo de uso
 
 1. Elige el modo (cámara o pantalla).
-2. Pulsa **Continuar** y abre la **Biblioteca** (gratis / premium) o **Usar mi imagen**.
+2. Pulsa **Continuar** y abre la **Biblioteca** (carrusel por categoría) o **Usar mi imagen**.
 3. Ajusta opacidad, zoom y rotación de la referencia.
 4. Bloquea la imagen cuando esté lista y dibuja.
 5. Pulsa atrás para salir del lienzo.
@@ -46,7 +46,7 @@ App Android para **trazar dibujos** superponiendo una imagen de tu galería sobr
 |-------|--------|
 | **Nombre** | AR Draw: Easy Sketching |
 | **Package** | `com.ardrawing.gocho` |
-| **Versión** | 1.6.0 (versionCode 8) |
+| **Versión** | 1.7.0 (versionCode 9) |
 | **minSdk** | 26 (Android 8.0) |
 | **targetSdk** | 36 (Android 16) |
 | **Lenguaje** | Kotlin |

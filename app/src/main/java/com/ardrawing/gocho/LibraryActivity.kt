@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
@@ -15,9 +16,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ardrawing.gocho.databinding.ActivityLibraryBinding
-import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.launch
 
 class LibraryActivity : AppCompatActivity() {
@@ -27,8 +27,6 @@ class LibraryActivity : AppCompatActivity() {
     private lateinit var adsHelper: AdsHelper
 
     private var mode: DrawingMode = DrawingMode.CAMERA
-    private var allImages: List<CatalogImage> = emptyList()
-    private var showPremiumTab: Boolean = false
 
     private val pickImage = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia(),
@@ -42,7 +40,7 @@ class LibraryActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var adapter: LibraryAdapter
+    private lateinit var categoryAdapter: LibraryCategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +50,7 @@ class LibraryActivity : AppCompatActivity() {
         )
         binding = ActivityLibraryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         val app = application as ARDrawingApp
         catalogRepository = app.catalogRepository
@@ -70,24 +69,12 @@ class LibraryActivity : AppCompatActivity() {
 
         binding.toolbarLibrary.setNavigationOnClickListener { finish() }
 
-        adapter = LibraryAdapter(
+        categoryAdapter = LibraryCategoryAdapter(
             scope = lifecycleScope,
             onImageClick = { image -> onCatalogImageSelected(image) },
         )
-        binding.recyclerImages.layoutManager = GridLayoutManager(this, 2)
-        binding.recyclerImages.adapter = adapter
-
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.tab_free))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.tab_premium))
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                showPremiumTab = tab.position == 1
-                refreshFilteredList()
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
-            override fun onTabReselected(tab: TabLayout.Tab?) = Unit
-        })
+        binding.recyclerImages.layoutManager = LinearLayoutManager(this)
+        binding.recyclerImages.adapter = categoryAdapter
 
         binding.btnUseGallery.setOnClickListener {
             pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
@@ -107,29 +94,36 @@ class LibraryActivity : AppCompatActivity() {
             binding.progressLoading.isVisible = false
 
             result.onSuccess { images ->
-                allImages = images
-                refreshFilteredList()
+                categoryAdapter.submitRows(groupByCategory(images))
+                binding.textEmpty.isVisible = false
             }.onFailure { error ->
+                categoryAdapter.submitRows(emptyList())
                 binding.textEmpty.isVisible = true
                 binding.textEmpty.text = getString(R.string.library_load_error, error.message ?: "")
             }
         }
     }
 
-    private fun refreshFilteredList() {
-        val filtered = allImages.filter { image ->
-            if (showPremiumTab) image.isPremium else !image.isPremium
+    private fun groupByCategory(images: List<CatalogImage>): List<LibraryCategoryRow> {
+        val grouped = images.groupBy { it.category }
+        return CatalogCategory.displayOrder.map { category ->
+            LibraryCategoryRow(
+                category = category,
+                images = interleaveFreeAndPremium(grouped[category.key].orEmpty()),
+            )
         }
-        adapter.submitList(filtered)
-        val showEmpty = filtered.isEmpty() && !binding.progressLoading.isVisible
-        binding.textEmpty.isVisible = showEmpty
-        if (showEmpty) {
-            binding.textEmpty.text = if (allImages.isEmpty()) {
-                getString(R.string.library_empty)
-            } else {
-                getString(R.string.library_tab_empty)
-            }
+    }
+
+    private fun interleaveFreeAndPremium(images: List<CatalogImage>): List<CatalogImage> {
+        val free = images.filter { !it.isPremium }
+        val premium = images.filter { it.isPremium }
+        val mixed = ArrayList<CatalogImage>(images.size)
+        val limit = maxOf(free.size, premium.size)
+        for (index in 0 until limit) {
+            if (index < free.size) mixed.add(free[index])
+            if (index < premium.size) mixed.add(premium[index])
         }
+        return mixed
     }
 
     private fun onCatalogImageSelected(image: CatalogImage) {

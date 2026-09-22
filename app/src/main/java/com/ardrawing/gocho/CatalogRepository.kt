@@ -26,7 +26,23 @@ class CatalogRepository {
             )
         }
 
-        val url = "$baseUrl/rest/v1/images?select=id,title,thumbnail_url,image_url,is_premium,sort_order&order=sort_order.asc"
+        val selectWithCategory =
+            "$baseUrl/rest/v1/images?select=id,title,thumbnail_url,image_url,is_premium,category,sort_order&order=sort_order.asc"
+        val selectLegacy =
+            "$baseUrl/rest/v1/images?select=id,title,thumbnail_url,image_url,is_premium,sort_order&order=sort_order.asc"
+
+        runCatching {
+            executeCatalogRequest(selectWithCategory, anonKey, context)
+        }.recoverCatching {
+            executeCatalogRequest(selectLegacy, anonKey, context)
+        }
+    }
+
+    private fun executeCatalogRequest(
+        url: String,
+        anonKey: String,
+        context: Context,
+    ): List<CatalogImage> {
         val request = Request.Builder()
             .url(url)
             .header("apikey", anonKey)
@@ -34,14 +50,12 @@ class CatalogRepository {
             .header("Accept", "application/json")
             .build()
 
-        runCatching {
-            client.newCall(request).execute().use { response ->
-                if (!response.isSuccessful) {
-                    error(context.getString(R.string.supabase_error, response.code))
-                }
-                val body = response.body?.string() ?: "[]"
-                parseImages(body)
+        client.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) {
+                error(context.getString(R.string.supabase_error, response.code))
             }
+            val body = response.body?.string() ?: "[]"
+            return parseImages(body)
         }
     }
 
@@ -57,6 +71,8 @@ class CatalogRepository {
                     thumbnailUrl = obj.getString("thumbnail_url"),
                     imageUrl = obj.getString("image_url"),
                     isPremium = obj.optBoolean("is_premium", false),
+                    category = obj.optString("category", CatalogCategory.ANIMALS.key)
+                        .ifBlank { CatalogCategory.ANIMALS.key },
                     sortOrder = obj.optInt("sort_order", 0),
                 ),
             )

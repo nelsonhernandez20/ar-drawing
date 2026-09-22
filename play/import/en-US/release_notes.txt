@@ -1,4 +1,3 @@
-• Free and premium template library
-• Ads: banners and interstitials
-• Targets Android 16
-• English and Spanish UI
+• Library categories with horizontal carousels
+• Premium templates mixed with free (crown + ad)
+• Screen stays on while drawing

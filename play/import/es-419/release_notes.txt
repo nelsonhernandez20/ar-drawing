@@ -1,4 +1,3 @@
-• Biblioteca de plantillas gratis y premium
-• Anuncios: banners e intersticiales
-• La app apunta a Android 16
-• Interfaz en inglés y español
+• Biblioteca por categorías con carrusel
+• Plantillas premium mezcladas con gratis (corona + anuncio)
+• La pantalla no se apaga al dibujar

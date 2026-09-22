@@ -25,16 +25,6 @@
             app:title="@string/library_title"
             app:titleCentered="true"
             app:titleTextColor="@color/on_primary" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/primary"
-            app:tabIndicatorColor="@color/on_primary"
-            app:tabIndicatorFullWidth="false"
-            app:tabSelectedTextColor="@color/on_primary"
-            app:tabTextColor="#CCFFFFFF" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

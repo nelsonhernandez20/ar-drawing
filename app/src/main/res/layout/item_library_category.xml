@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="4dp">
+
+    <TextView
+        android:id="@+id/textCategoryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        android:textColor="@color/on_background"
+        android:textStyle="bold"
+        tools:text="Dibujo de animales" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCategoryImages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:minHeight="200dp"
+        android:nestedScrollingEnabled="true"
+        android:orientation="horizontal"
+        android:overScrollMode="ifContentScrolls"
+        android:paddingHorizontal="12dp"
+        tools:listitem="@layout/item_library_image" />
+
+    <TextView
+        android:id="@+id/textCategoryEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="24dp"
+        android:text="@string/library_category_empty"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textColor="@color/on_background"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</LinearLayout>

@@ -24,11 +24,13 @@
     <string name="toggle_tools_expand">Mostrar herramientas de dibujo</string>
     <string name="reference_thumb">Vista previa de la imagen de referencia</string>
     <string name="library_title">Biblioteca</string>
-    <string name="tab_free">Gratis</string>
-    <string name="tab_premium">Premium</string>
+    <string name="category_3d">Dibujos en 3D</string>
+    <string name="category_animemes">AniMemes</string>
+    <string name="category_animals">Dibujo de animales</string>
+    <string name="category_cars">Dibujos de carros</string>
     <string name="use_my_image">Usar mi imagen</string>
     <string name="library_empty">No hay plantillas todavía. Usa tu imagen o configura Supabase.</string>
-    <string name="library_tab_empty">No hay plantillas en esta categoría.</string>
+    <string name="library_category_empty">Aún no hay plantillas en esta categoría.</string>
     <string name="library_load_error">No se pudo cargar el catálogo: %1$s</string>
     <string name="download_error">No se pudo descargar la imagen.</string>
     <string name="premium_locked">Plantilla premium (anuncio)</string>

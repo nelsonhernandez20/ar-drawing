@@ -24,11 +24,13 @@
     <string name="toggle_tools_expand">Show drawing tools</string>
     <string name="reference_thumb">Reference image preview</string>
     <string name="library_title">Library</string>
-    <string name="tab_free">Free</string>
-    <string name="tab_premium">Premium</string>
+    <string name="category_3d">3D drawings</string>
+    <string name="category_animemes">AniMemes</string>
+    <string name="category_animals">Animal drawings</string>
+    <string name="category_cars">Car drawings</string>
     <string name="use_my_image">Use my image</string>
     <string name="library_empty">No templates yet. Use your own image or set up Supabase.</string>
-    <string name="library_tab_empty">No templates in this category.</string>
+    <string name="library_category_empty">No templates in this category yet.</string>
     <string name="library_load_error">Could not load catalog: %1$s</string>
     <string name="download_error">Could not download the image.</string>
     <string name="premium_locked">Premium template (ad)</string>

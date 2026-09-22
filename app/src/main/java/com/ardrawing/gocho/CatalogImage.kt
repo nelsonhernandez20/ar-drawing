@@ -6,5 +6,6 @@ data class CatalogImage(
     val thumbnailUrl: String,
     val imageUrl: String,
     val isPremium: Boolean,
+    val category: String,
     val sortOrder: Int,
 )

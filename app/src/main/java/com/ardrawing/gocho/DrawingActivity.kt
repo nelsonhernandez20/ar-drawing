@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.WindowManager
 import android.view.ScaleGestureDetector
 import android.widget.Toast
 import android.graphics.Color
@@ -102,6 +103,7 @@ class DrawingActivity : AppCompatActivity() {
         )
         binding = ActivityDrawingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
